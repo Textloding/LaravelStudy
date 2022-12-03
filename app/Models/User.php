@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    //提高安全性 防止批量赋值引发安全问题
+    //只有包含在该属性中的字段才能正常被更新
     protected $fillable = [
         'name',
         'email',
@@ -28,6 +30,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    //敏感信息隐藏
     protected $hidden = [
         'password',
         'remember_token',
