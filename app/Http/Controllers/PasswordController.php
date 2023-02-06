@@ -12,6 +12,18 @@ use Carbon\Carbon;
 
 class PasswordController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+
+        // 限流 10 分钟十次
+        $this->middleware('throttle:10,10', [
+            'only' => ['store']
+        ]);
+    }
+
     public function showLinkRequestForm()
     {
         return view('auth.passwords.email');
